@@ -1,12 +1,10 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/Form.module.css";
-import axios from "axios";
 
 export default function Registieren() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,26 +12,30 @@ export default function Registieren() {
     e.preventDefault();
     // console.log(user.name, user.email, user.password);
     try {
-      const { data } = await axios.post("/api/register", {
-        name,
-        email,
-        password,
+      await fetch("/api/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
       });
-      console.log(data);
-    } catch {}
+      console.log("Successfully registered");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2>Registieren</h2>
-        <label htmlFor="name">Benutzername:</label>
+        <label htmlFor="username">Benutzername:</label>
         <input
           type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="username"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <br />
         <label htmlFor="email">Email:</label>
