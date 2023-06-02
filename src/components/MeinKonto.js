@@ -5,7 +5,7 @@ import { useState } from "react";
 import styles from "../../styles/Form.module.css";
 
 export default function MeinKonto() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,13 +16,13 @@ export default function MeinKonto() {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2>Login</h2>
-      <label htmlFor="name">Benutzername:</label>
+      <label htmlFor="username">Benutzername:</label>
       <input
         type="text"
-        name="name"
-        id="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        name="username"
+        id="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <br />
       <label htmlFor="email">Email:</label>
