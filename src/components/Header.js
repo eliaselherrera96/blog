@@ -17,7 +17,7 @@ export default function Header() {
           />
         </Link>
         <p className="header-undertitle">
-          Reiseblog & Outdoor-Abenteuer aus München
+          Reiseblog & Outdoor-Abenteuer aus NRW
         </p>
       </div>
       <Navbar />

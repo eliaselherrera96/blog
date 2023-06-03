@@ -1,10 +1,10 @@
-import MeinKonto from "@/components/MeinKonto";
+import Login from "@/components/Login";
 import React from "react";
 
-export default function meinKonto() {
+export default function page() {
   return (
     <div>
-      <MeinKonto />
+      <Login />
     </div>
   );
 }
