@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "./Navbar";
 import Link from "next/link";
+import styles from "../styles/Navbar.module.css";
 
 export default function Header() {
   return (
-    <div className="header">
+    <div className={styles.header}>
       <div className="centered-image">
         <Link href="/">
           <Image
@@ -16,9 +17,9 @@ export default function Header() {
             height={100}
           />
         </Link>
-        <p className="header-undertitle">
-          Reiseblog & Outdoor-Abenteuer aus München
-        </p>
+        <div>
+          <p>Reiseblog & Outdoor-Abenteuer aus München</p>
+        </div>
       </div>
       <Navbar />
     </div>

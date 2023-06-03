@@ -1,4 +1,4 @@
-import Registieren from "@/components/Registieren";
+import Registieren from "../../../../components/Registieren";
 
 import React from "react";
 

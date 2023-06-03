@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import styles from "../../styles/Form.module.css";
+import styles from "../styles/Form.module.css";
 
 export default function Registieren() {
   const [username, setUsername] = useState("");
