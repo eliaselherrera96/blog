@@ -1,11 +1,10 @@
-import Register from "@/components/Register";
-
 import React from "react";
+import DeleteAccount from "@/components/DeleteAccount";
 
 export default function page() {
   return (
     <div>
-      <Register />
+      <DeleteAccount />
     </div>
   );
 }

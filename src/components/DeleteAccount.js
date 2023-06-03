@@ -3,23 +3,21 @@ import React from "react";
 import { useState } from "react";
 import styles from "../../styles/Form.module.css";
 
-export default function Registieren() {
+export default function DeleteAccount() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(user.name, user.email, user.password);
     try {
-      await fetch("/api/register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
+      const queryString = `username=${username}&email=${email}&password=${password}`;
+      const response = await fetch(`/api/deleteUser?${queryString}`, {
+        method: "DELETE",
       });
-      console.log("Successfully registered");
+      const data = await response.json();
+      console.log(data);
+      console.log("Successfully deleted!");
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +26,7 @@ export default function Registieren() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2>Registieren</h2>
+        <h2>Konto löschen</h2>
         <label htmlFor="username">Benutzername:</label>
         <input
           type="text"
@@ -56,7 +54,7 @@ export default function Registieren() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <button type="submit">Registieren</button>
+        <button type="submit">Löschen</button>
       </form>
     </>
   );

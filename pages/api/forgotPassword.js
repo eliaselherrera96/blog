@@ -2,17 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "../../database/connectDB";
-import authMiddleware from "../../middlewares/authMiddleware.js";
 import notFoundMiddleware from "../../middlewares/notFoundMiddleware";
 import errorHandlerMiddleware from "../../middlewares/errorHandlerMiddleware";
-import { loginUserController } from "../../controllers/userController";
+import { changePasswordController } from "../../controllers/userController";
 
 dotenv.config();
 const app = express();
 app.use(cors());
 
-// app.post("/api/login", authMiddleware, loginUserController);
-app.post("/api/login", loginUserController);
+app.put("/api/forgotPassword", changePasswordController);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

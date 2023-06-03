@@ -1,11 +1,10 @@
-import Register from "@/components/Register";
-
 import React from "react";
+import ForgotPassword from "@/components/ForgotPassword";
 
 export default function page() {
   return (
     <div>
-      <Register />
+      <ForgotPassword />
     </div>
   );
 }
