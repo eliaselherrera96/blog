@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "../../styles/Form.module.css";
 
 export default function Register() {
@@ -58,6 +59,9 @@ export default function Register() {
         />
         <br />
         <button type="submit">Registieren</button>
+        <button>
+          <Link href="/mein-konto">zurück</Link>
+        </button>
       </form>
     </>
   );

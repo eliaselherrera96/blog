@@ -1,8 +1,32 @@
-
 .form {
-  border: 1px solid black;
   width: 40vw;
-  height: 40vh;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 3rem auto;
+  border-radius: 4px;
+  background-color: rgb(47, 194, 231);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.labelInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 10px; */
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.link {
+  margin-top: 10px;
+  text-decoration: none;
 }
