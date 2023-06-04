@@ -29,9 +29,11 @@ export default function Login() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2 className="title">Login</h2>
 
-      <label htmlFor="username">Benutzername:</label>
+      <label className="username" htmlFor="username">
+        Benutzername:
+      </label>
       <input
         type="text"
         name="username"
@@ -40,7 +42,9 @@ export default function Login() {
         onChange={(e) => setUsername(e.target.value)}
       />
       <br />
-      <label htmlFor="password">Passwort:</label>
+      <label className="password" htmlFor="password">
+        Passwort:
+      </label>
       <input
         type="password"
         name="password"
@@ -49,7 +53,11 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      <button type="submit">Anmelden</button>
+      <button className="btn" type="submit">
+        Anmelden
+      </button>
+      <button className="btn">Abrechen</button>
+      <br />
       <Link href="/mein-konto/konto-loschen">Konto Löschen</Link>
       <p>
         <Link href="/mein-konto/passwort-vergessen">Passwort vergessen?</Link>

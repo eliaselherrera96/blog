@@ -1,7 +1,8 @@
+
 .form {
-  width: 60vw;
+  border: 1px solid black;
+  width: 40vw;
   height: 40vh;
-  border: 2px solid black;
-  margin: 50px auto;
-  padding: 30px;
+  margin: 2rem auto;
+  padding: 2rem;
 }
