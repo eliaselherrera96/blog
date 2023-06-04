@@ -1,4 +1,4 @@
-import MeinKonto from "../../../components/MeinKonto";
+import MeinKonto from "../../../components/MeinKonto.js";
 import React from "react";
 
 export default function meinKonto() {

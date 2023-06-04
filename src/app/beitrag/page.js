@@ -1,4 +1,4 @@
-import Beitrag from "../../../components/Beitrag";
+import Beitrag from "../../../components/Beitrag.js";
 import React from "react";
 
 export default function beitrag() {
