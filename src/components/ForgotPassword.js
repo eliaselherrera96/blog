@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
 import styles from "../../styles/Form.module.css";
 
 export default function ForgotPassword() {
@@ -55,7 +56,7 @@ export default function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        <label htmlFor="code">Code:</label>
+        <label htmlFor="code">Bestätigungs Code:</label>
         <input
           type="text"
           name="code"
@@ -83,6 +84,9 @@ export default function ForgotPassword() {
         />
         <br />
         <button type="submit">Ändern</button>
+        <button>
+          <Link href="/mein-konto">zurück</Link>
+        </button>
       </form>
     </>
   );

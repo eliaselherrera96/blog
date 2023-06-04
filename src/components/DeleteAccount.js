@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
 import styles from "../../styles/Form.module.css";
 
 export default function DeleteAccount() {
@@ -55,6 +56,9 @@ export default function DeleteAccount() {
         />
         <br />
         <button type="submit">Löschen</button>
+        <button>
+          <Link href="/mein-konto">zurück</Link>
+        </button>
       </form>
     </>
   );

@@ -29,43 +29,56 @@ export default function Login() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className="title">Login</h2>
+      <h2 className={styles.titel}>Login</h2>
+      <div className={styles.labelInput}>
+        <label className={styles.label} htmlFor="username">
+          Benutzername:
+        </label>
+        <br />
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br />
+        <label className={styles.label} htmlFor="password">
+          Passwort:
+        </label>
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <br />
+      <div className="btns">
+        <button className={styles.btn} type="submit">
+          Anmelden
+        </button>
 
-      <label className="username" htmlFor="username">
-        Benutzername:
-      </label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <button href="/mein-konto/registieren" className={styles.btn}>
+          <Link className={styles.link} href="/mein-konto/registieren">
+            Registrieren
+          </Link>
+        </button>
+      </div>
       <br />
-      <label className="password" htmlFor="password">
-        Passwort:
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <button className="btn" type="submit">
-        Anmelden
-      </button>
-      <button className="btn">Abrechen</button>
-      <br />
-      <Link href="/mein-konto/konto-loschen">Konto Löschen</Link>
-      <p>
-        <Link href="/mein-konto/passwort-vergessen">Passwort vergessen?</Link>
-      </p>
-      <p>
+      <Link className={styles.link} href="/mein-konto/passwort-vergessen">
+        Passwort vergessen?
+      </Link>
+      <Link className={styles.link} href="/mein-konto/konto-loschen">
+        Konto Löschen
+      </Link>
+
+      {/* <p className="link">
         Haben Sie kein Konto?
         <Link href="/mein-konto/registieren">Registrieren Sie sich hier</Link>
-      </p>
+      </p> */}
     </form>
   );
 }
