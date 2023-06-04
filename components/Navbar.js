@@ -24,9 +24,9 @@ export default function Navbar() {
         </li>
         <li>
           <Link
-            href="/beitrage"
+            href="/beitrag"
             className={
-              router.pathname === "/beitrage"
+              router.pathname === "/beitrag"
                 ? `${styles.link} ${styles.active}`
                 : styles.link
             }
