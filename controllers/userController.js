@@ -5,7 +5,6 @@ export async function registerUserController(req, res, next) {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    console.log("user fields not exist");
     return res
       .status(400)
       .send("Es wurden nicht alle erforderlichen Felder übmittelt!");
@@ -106,22 +105,17 @@ export async function changePasswordController(req, res, next) {
       return res.status(400).json({ message: "Benutzer nicht gefunden" });
     }
 
-    // Check if the provided email matches the user's email
     if (user.email !== email) {
       return res.status(400).json({ message: "Ungültige Email-Adresse" });
     }
 
-    // Check if the provided code matches the user's verification code
     if (user.code !== code) {
       return res.status(400).json({ message: "Ungültiger Verifizierungscode" });
     }
 
-    // Hash the new password
     const hashedPassword = await hashPassword(password);
 
-    // Update the user's password
     user.password = hashedPassword;
-    // Clear the verification code after successful password change
     user.code = null;
     await user.save();
 
