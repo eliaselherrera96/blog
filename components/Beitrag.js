@@ -1,13 +1,15 @@
 "use client";
 
+import ListBeitrag from "./listBeitrag.js";
 import { useState } from "react";
 import styles from "../styles/beitrag.module.css";
 
 export default function BeitragHinzufuegen() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
+  const [list, setList] = useState([]);
+
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -71,6 +73,19 @@ export default function BeitragHinzufuegen() {
           Beitrag hinzufügen
         </button>
       </form>
+      <div className="listWrapper">
+        <ul>
+          {list.map((el, index) => (
+            <ListBeitrag
+              key={index}
+              beitrag={el.beitrag}
+              list={list}
+              setList={setList}
+              id={el._id}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
