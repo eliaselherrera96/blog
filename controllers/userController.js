@@ -90,9 +90,9 @@ export async function deleteUserController(req, res, next) {
 }
 
 export async function changePasswordController(req, res, next) {
-  const { username, email, password, code } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!username || !email || !password || !code) {
+  if (!username || !email || !password) {
     return res.status(400).json({
       message: "Es wurden nicht alle erforderlichen Felder übermittelt!",
     });
@@ -107,10 +107,6 @@ export async function changePasswordController(req, res, next) {
 
     if (user.email !== email) {
       return res.status(400).json({ message: "Ungültige Email-Adresse" });
-    }
-
-    if (user.code !== code) {
-      return res.status(400).json({ message: "Ungültiger Verifizierungscode" });
     }
 
     const hashedPassword = await hashPassword(password);

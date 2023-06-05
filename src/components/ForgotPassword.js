@@ -7,30 +7,29 @@ import styles from "../../styles/Form.module.css";
 export default function ForgotPassword() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/forgotPassword", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          code,
-          newPassword,
-          confirmNewPassword,
-        }),
-      });
-      const data = response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
+    if (password === confirmPassword) {
+      try {
+        const response = await fetch("/api/forgotPassword", {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        });
+        const data = response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -56,22 +55,13 @@ export default function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        <label htmlFor="code">Bestätigungs Code:</label>
-        <input
-          type="text"
-          name="code"
-          id="code"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <br />
         <label htmlFor="password">Neues Passwort:</label>
         <input
           type="password"
           name="password"
           id="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <br />
         <label htmlFor="password">Neues Passwort bestätigen:</label>
@@ -79,8 +69,8 @@ export default function ForgotPassword() {
           type="password"
           name="password"
           id="password"
-          value={confirmNewPassword}
-          onChange={(e) => setConfirmNewPassword(e.target.value)}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <br />
         <button type="submit">Ändern</button>
