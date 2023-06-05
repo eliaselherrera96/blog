@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import styles from "../../styles/Form.module.css";
+import styles from "../styles/Form.module.css";
 
 export default function ForgotPassword() {
   const [username, setUsername] = useState("");
