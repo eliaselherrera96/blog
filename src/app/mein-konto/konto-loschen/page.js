@@ -1,5 +1,5 @@
 import React from "react";
-import DeleteAccount from "@/components/DeleteAccount";
+import DeleteAccount from "../../../../components/DeleteAccount";
 
 export default function page() {
   return (
