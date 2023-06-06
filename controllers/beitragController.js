@@ -2,16 +2,25 @@ import beitragModel from "../model/beitragModel.js";
 
 // POST / CREATE
 
-async function createBeitragController(req, res) {
-  try {
-    const newBeitrag = beitragModel({
-        beitrag: req.body.beitrag,
-    });
+async function createBeitragController(req, res, next) {
+const { title, content } = req.body;
 
-    const savedBeitrag = await newBeitrag.save();
-    res.status(200).json(savedBeitrag);
+if (!title || !content ) {
+  return res
+    .status(400)
+    .json("Es wurden nicht alle erforderlichen Felder übmittelt!");
+}
+
+  try {
+    const newBeitrag = new beitragModel({
+      title,
+      content,
+  });
+
+    await newBeitrag.save();
+    res.status(201).json({message: "Beitrag saved"});
   } catch (error) {
-    res.json(error);
+    res.status(500).json({message: "Beitrag wurde nicht gespeichert"});
   }
 }
 
@@ -21,7 +30,7 @@ async function getAllBeitragsController(req, res) {
     const allBeitragItems = await beitragModel.find({});
     res.status(200).json(allBeitragItems);
   } catch (error) {
-    res.json(error);
+    res.status(500).json({ message: error.message });
   }
 }
 
