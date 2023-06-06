@@ -1,32 +1,7 @@
 .form {
-  width: 40vw;
-  margin: 3rem auto;
-  border-radius: 4px;
-  background-color: rgb(47, 194, 231);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.labelInput {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* margin-bottom: 10px; */
-}
-
-.label {
-  margin-bottom: 5px;
-}
-
-.btn {
-  margin-top: 10px;
-}
-
-.link {
-  margin-top: 10px;
-  text-decoration: none;
+  width: 60vw;
+  height: 40vh;
+  border: 2px solid black;
+  margin: 50px auto;
+  padding: 30px;
 }
