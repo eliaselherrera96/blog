@@ -11,16 +11,16 @@ import {
 const beitragRouter = express.Router();
 
 // get / read
-beitragkRouter.get("/", getAllBeitragsController);
+beitragRouter.get("/", getAllBeitragsController);
 
 // create / post
 beitragRouter.post("/", createBeitragController);
 
 //update
-beitragRouter.put("/:taskId",   updateBeitragController);
+beitragRouter.put("/:beitragId",   updateBeitragController);
 
 // Delete one
-beitragRouter.delete("/:taskId", deleteBeitragController);
+beitragRouter.delete("/:beitragId", deleteBeitragController);
 
 // delete all
 beitragRouter.delete("/", deleteAllBeitragsController);

@@ -1,14 +1,33 @@
 "use client";
 
-import ListBeitrag from "./listBeitrag.js";
-import { useState } from "react";
+import ListBeitrag from "../components/listBeitrag.js";
+import { useState, useEffect } from "react";
 import styles from "../styles/beitrag.module.css";
+import axios from 'axios';
+
+const baseURL = "/beitrags";
+
 
 export default function BeitragHinzufuegen() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [list, setList] = useState([]);
+
+  const fetchBeitrags = async () => {
+    try {
+      const response = await axios.get(baseURL);
+      const data = response.data;
+
+      setList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBeitrags();
+  }, []);
 
 
   const handleTitleChange = (e) => {
@@ -24,11 +43,39 @@ export default function BeitragHinzufuegen() {
     setImage(selectedImage);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Hier kannst du den Code hinzufügen, um den Beitrag und das Bild zu speichern oder zu verarbeiten
-    // Du kannst das `image`-State verwenden, um das ausgewählte Bild an den Server zu senden oder zu speichern
-    console.log("Beitrag hinzufügen:", { title, content, image });
+    
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+      
+      try {
+        const response = await axios.post("/upload", formData);
+        // Hier kannst du die Antwort des Servers verarbeiten, z. B. die URL des hochgeladenen Bildes erhalten
+        const imageURL = response.data.imageURL;
+        
+        // Hier kannst du den Beitrag speichern und die URL des Bildes zusammen mit dem Titel und Inhalt senden
+        const postData = {
+          title: title,
+          content: content,
+          imageURL: imageURL,
+        };
+        
+        // Hier kannst du den Beitrag an den Server senden
+        const postResponse = await axios.post("/posts", postData);
+        // Hier kannst du die Antwort des Servers verarbeiten, z. B. die neue Liste der Beiträge aktualisieren
+        const updatedList = [...list, postResponse.data];
+        setList(updatedList);
+        
+        // Zurücksetzen der Eingabefelder
+        setTitle("");
+        setContent("");
+        setImage(null);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (

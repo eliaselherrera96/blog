@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function ListItem({ beitrag, list, setList, id }) {
+export default function ListBeitrag({ list, setList, id }) {
   const [edit, setEdit] = useState(false);
   const [newBeitrag, setNewBeitrag] = useState("");
 
