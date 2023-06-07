@@ -39,7 +39,7 @@
   .submitButton {
     background-color: #4bc0d8;
     color: white;
-    border: none;
+    border: 1 px solid gray;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;

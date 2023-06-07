@@ -14,7 +14,7 @@ if (!title || !content ) {
   try {
     const newBeitrag = new beitragModel({
       title,
-      content,
+      content
   });
 
     await newBeitrag.save();
