@@ -52,8 +52,9 @@ async function updateBeitragController(req, res) {
 }
 
 // DELETE Beitrag
+// DELETE Beitrag
 async function deleteBeitragController(req, res) {
-  const deleteId = req.params.beitragId;
+  const deleteId = req.body._id; 
   try {
     await beitragModel.findByIdAndDelete(deleteId);
     res.status(200).json("Beitrag GELÖSCHT!");
@@ -61,6 +62,7 @@ async function deleteBeitragController(req, res) {
     res.json(error);
   }
 }
+
 
 // DELETE ALL Beitrags
 
