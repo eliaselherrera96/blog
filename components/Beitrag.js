@@ -2,55 +2,110 @@
 
 import { useState, useEffect } from "react";
 import styles from "../styles/beitrag.module.css";
-
+import BeitragListe from "./BeitragListe";
 
 export default function BeitragHinzufuegen() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [list, setList] = useState([]);
 
-  const fetchBeitrags = async (method) => {
-
-    if( method === "GET"){
+  const fetchBeitrags = async (method, id) => {
+    if (method === "GET") {
       try {
-        const response = await fetch("/api/beitrag", {
+        const response = await fetch("http://localhost:3000/api/beitrag", {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-          }
+          },
         });
         const data = await response.json();
         console.log(data);
-  
+
         setList(data);
       } catch (error) {
         console.log(error);
       }
-    }
-    else if( method === "POST"){
+    } else if (method === "POST") {
       try {
-        const response = await fetch("/api/beitrag", {
+        const response = await fetch("http://localhost:3000/api/beitrag", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({title, content})
+          body: JSON.stringify({ title, content }),
         });
         const data = await response.json();
         console.log(data);
-  
+
         setList(data);
       } catch (error) {
         console.log(error);
       }
+    } else if (method === "DELETE") {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/beitrag/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({ title, content }),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+
+        const filteredList = list.filter((el) => el._id !== id);
+
+        console.log({ filteredList });
+        setList(filteredList);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (method === "PUT") {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/beitrag/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              title,
+              content,
+              beitrag: newBeitrag,
+            }),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+
+        const updateBeitragId = list.findIndex((el) => el._id === id);
+
+        const updatedBeitragItem = {
+          ...list[updateBeitragId],
+          beitrag: newBeitrag,
+        };
+
+        const newList = list.map((el) => {
+          if (el._id === id) return updatedBeitragItem;
+          return el;
+        });
+
+        setList(newList);
+        setNewBeitrag("");
+      } catch (error) {
+        console.log(error);
+      }
+      setEdit(false);
     }
   };
-  
 
   useEffect(() => {
     fetchBeitrags();
   }, []);
-
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -62,8 +117,36 @@ export default function BeitragHinzufuegen() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    await fetchBeitrags("POST"); 
+    setList([...list, { title, content }]);
+    setTitle("");
+    setContent("");
+  };
+  
+  
 
-    fetchBeitrags("POST")
+  const deleteAll = async () => {
+    try {
+      const response = await fetch("/api/beitrag", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+
+      setList([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteAll = (evt) => {
+    evt.preventDefault();
+    deleteAll();
+    setList([]);
   };
 
   return (
@@ -93,10 +176,13 @@ export default function BeitragHinzufuegen() {
             className={styles.textarea}
           />
         </div>
+
         <button type="submit" className={styles.submitButton}>
           Beitrag hinzufügen
         </button>
+        <button onClick={handleDeleteAll} className={styles.submitButton}>Delete all</button>
       </form>
+      <BeitragListe beitraege={Object.values(list)} />
     </div>
   );
 }
