@@ -41,29 +41,30 @@ export default function BeitragHinzufuegen() {
       } catch (error) {
         console.log(error);
       }
-    } else if (method === "DELETE") {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/beitrag/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({ title, content }),
-          }
-        );
-        const data = await response.json();
-        console.log(data);
+    // } else if (method === "DELETE") {
+    //   try {
+    //     const response = await fetch(
+    //       `http://localhost:3000/api/beitrag/${id}`,
+    //       {
+    //         method: "DELETE",
+    //         headers: {
+    //           "Content-type": "application/json",
+    //         },
+    //         body: JSON.stringify({ title, content }),
+    //       }
+    //     );
+    //     const data = await response.json();
+    //     console.log(data);
 
-        const filteredList = list.filter((el) => el._id !== id);
+    //     const filteredList = list.filter((el) => el._id !== id);
 
-        console.log({ filteredList });
-        setList(filteredList);
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (method === "PUT") {
+    //     console.log({ filteredList });
+    //     setList(filteredList);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+     } 
+     else if (method === "PUT") {
       try {
         const response = await fetch(
           `http://localhost:3000/api/beitrag/${id}`,
@@ -104,7 +105,7 @@ export default function BeitragHinzufuegen() {
   };
 
   useEffect(() => {
-    fetchBeitrags();
+    fetchBeitrags("GET", null);
   }, []);
 
   const handleTitleChange = (e) => {
@@ -123,8 +124,6 @@ export default function BeitragHinzufuegen() {
     setTitle("");
     setContent("");
   };
-  
-  
 
   const deleteAll = async () => {
     try {
@@ -176,13 +175,12 @@ export default function BeitragHinzufuegen() {
             className={styles.textarea}
           />
         </div>
-
         <button type="submit" className={styles.submitButton}>
           Beitrag hinzufügen
         </button>
-        <button onClick={handleDeleteAll} className={styles.submitButton}>Delete all</button>
+        <button onClick={handleDeleteAll} className={styles.submitButton}>Alles löschen</button>
       </form>
-      <BeitragListe beitraege={Object.values(list)} />
+      <BeitragListe beitraege={Object.values(list)} title={title} content={content} list={list} setList={setList}/>
     </div>
   );
 }
